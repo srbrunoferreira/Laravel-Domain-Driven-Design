@@ -2,11 +2,11 @@
 
 namespace Domain\User\Http\Requests;
 
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
 
-final class CreateUserRequest extends FormRequest
+final class UserStoreRequest extends FormRequest
 {
     public function rules(): array
     {
@@ -16,7 +16,7 @@ final class CreateUserRequest extends FormRequest
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
             'email.required' => 'O campo de senha é obrigatório.',
@@ -24,7 +24,7 @@ final class CreateUserRequest extends FormRequest
         ];
     }
 
-    protected function failedValidation(Validator $validator)
+    protected function failedValidation(Validator $validator): void
     {
         throw new HttpResponseException(response([
             $validator->errors(),
