@@ -11,15 +11,24 @@ final class UserUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|max:255',
+            'id' => 'required|integer|max:30',
+            'name' => 'required_without_all:email,password',
+            'email' => 'required_without_all:name,password',
+            'password' => 'required_without_all:name,email',
         ];
     }
 
-    public function messages(): array
+    /**
+     * @see https://stackoverflow.com/a/63999403/14839095
+     * @see https://laravel.com/docs/master/validation#preparing-input-for-validation
+     */
+    protected function prepareForValidation()
     {
-        return [
-            'email.required' => 'O campo de senha é obrigatório.',
-        ];
+        /*
+        userId is a route parameter and now is the id of the
+        array returned from this.rules() method. So, it is attributed to validation
+        */
+        $this->merge(['id' => $this->route('userId')]);
     }
 
     protected function failedValidation(Validator $validator): void

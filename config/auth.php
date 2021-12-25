@@ -1,6 +1,6 @@
 <?php
 
-use Domain\User\Models\User;
+use Domain\User\Entities\User;
 
 return [
 
@@ -64,7 +64,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => Domain\User\Models\User::class,
+            'model' => Domain\User\Entities\User::class,
         ],
 
         // 'users' => [

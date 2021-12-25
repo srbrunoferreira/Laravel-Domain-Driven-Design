@@ -1,17 +1,26 @@
 <?php
 
-namespace Domain\User\Models;
+namespace Domain\User\Entities;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class User extends Authenticatable
 {
     use HasApiTokens;
     use HasFactory;
     use Notifiable;
+
+    // protected $table = 'table_name'
+    // public $timestamps = true;
+    // public const CREATED_AT = 'created_at';
+    // public const UPDATED_AT = 'updated_at';
+    // protected $primaryKey = 'id';
+    // public $incrementing = true;
+    // protected $keyType = 'integer';
+    // protected $dateFormat = 'U';
 
     /**
      * The attributes that are mass assignable.

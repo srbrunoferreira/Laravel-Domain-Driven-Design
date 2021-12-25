@@ -7,10 +7,19 @@ use Domain\User\Http\Requests\UserStoreRequest;
 use Domain\User\Http\Requests\UserShowRequest;
 use Domain\User\Http\Requests\UserSelectRequest;
 use Domain\User\Http\Requests\UserDestroyRequest;
+use Domain\User\DataTransferObjects\Factories\UserDataFactory;
+use Domain\User\Contracts\UserRepositoryInterface;
 use Application\Core\Http\Controllers\Controller;
 
 final class UserController extends Controller
 {
+    private UserRepositoryInterface $userRepository;
+
+    public function __construct(UserRepositoryInterface $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
+
     public function index(UserSelectRequest $request)
     {
         return response([
@@ -21,25 +30,34 @@ final class UserController extends Controller
 
     public function store(UserStoreRequest $request)
     {
+        $requestData = UserDataFactory::fromStoreRequest($request);
+
         return response([
             'method' => __METHOD__,
-            'requestAll()' => $request->all(),
+            'requestData' => $requestData,
+            'userRepository' => $this->userRepository->store($requestData),
         ], 200);
     }
 
     public function show(UserShowRequest $request)
     {
+        $requestData = UserDataFactory::fromShowRequest($request);
+
         return response([
             'method' => __METHOD__,
-            'requestAll()' => $request->all(),
+            'requestData' => $requestData,
+            'userRepository' => $this->userRepository->findOneById($requestData->id),
         ], 200);
     }
 
     public function update(UserUpdateRequest $request)
     {
+        $requestData = UserDataFactory::fromUpdateRequest($request);
+
         return response([
             'method' => __METHOD__,
-            'requestAll()' => $request->all(),
+            'requestData' => $requestData,
+            'properties' => $requestData->getFilledData(),
         ], 200);
     }
 

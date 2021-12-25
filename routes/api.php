@@ -23,4 +23,13 @@ Route::group(['prefix' => '/v1', 'middleware' => ['cors']], function () {
         Route::patch('/{userId}', [UserController::class, 'update']);
         Route::delete('/{userId}', [UserController::class, 'destroy']);
     });
+
+    Route::prefix('/calls')->group(function () {
+        Route::get('/calls', [CallController::class, ['index']]);
+        Route::post('/', [CallController::class, ['store']]);
+        Route::get('/{callId}', [CallController::class, ['show']]);
+        Route::put('/{callId}', [CallController::class, ['update']]);
+        Route::patch('/{callId}', [CallController::class, ['update']]);
+        Route::delete('/{callId}', [CallController::class, ['destroy']]);
+    });
 });

@@ -3,6 +3,7 @@
 namespace Application\Core\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Domain\User\Providers\RepositoryServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->register(RepositoryServiceProvider::class);
     }
 
     /**

@@ -7,3 +7,6 @@ php artisan migrate --path=app/Domain/User/Database/Migrations
 
 ### Rolback migration
 php artisan migrate:rollback --path=app/Domain/User/Database/Migrations
+
+### OBS:
+- Actions can be called services too.

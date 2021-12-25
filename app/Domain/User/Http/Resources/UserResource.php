@@ -2,16 +2,24 @@
 
 namespace Domain\User\Http\Resources;
 
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-final class UserResource extends FormRequest
+class UserResource extends JsonResource
 {
-    public function rules(Request $request): array
+    /**
+     * Transform the resource into an array.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
+     */
+    public function toArray($request)
     {
         return [
-            'email' => $request->email,
-            'password' => $request->password,
+            'id' => $this->id,
+            'name' => $this->name,
+            'email' => $this->email,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
     }
 }

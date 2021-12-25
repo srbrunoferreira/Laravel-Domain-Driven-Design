@@ -28,7 +28,7 @@
 
             "Application\\": "app/Application/",
             "Domain\\": "app/Domain/",
-            "Support\\": "app/Support/"
+            "Infrastructure\\": "app/Infrastructure/"
         }
     },
     "autoload-dev": {
