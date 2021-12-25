@@ -25,7 +25,7 @@ abstract class EloquentRepository implements EloquentRepositoryInterface
         return $this->model->where($criterea)->firstOrFail();
     }
 
-    public function update(int $id, array $data): Model
+    public function update(int $id, array $data): int
     {
         return $this->model->where('id', $id)->update($data);
     }
@@ -35,7 +35,7 @@ abstract class EloquentRepository implements EloquentRepositoryInterface
         return $this->model->create($data);
     }
 
-    public function delete(int $id): Model
+    public function delete(int $id): int
     {
         return $this->model->where('id', $id)->delete();
     }
@@ -48,5 +48,10 @@ abstract class EloquentRepository implements EloquentRepositoryInterface
     public function findByIdWhereIn(array $ids): Collection
     {
         return $this->model->whereIn('id', $ids)->get();
+    }
+
+    public function getAll(): Collection
+    {
+        return $this->model->all();
     }
 }

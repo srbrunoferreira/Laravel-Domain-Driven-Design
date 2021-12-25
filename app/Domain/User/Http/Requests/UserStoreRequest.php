@@ -11,14 +11,16 @@ final class UserStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|max:255',
-            'password' => 'required|max:255',
+            'name' => ['bail', 'required', 'string', 'min:5', 'max:255', "regex:/^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)/"],
+            'email' => ['bail', 'required', 'string', 'min:10', 'max:255'],
+            'password' => ['bail', 'required', 'string', 'min:8', 'max:255'],
         ];
     }
 
     public function messages(): array
     {
         return [
+            'name.required' => 'O campo nome é obrigatório.',
             'email.required' => 'O campo de senha é obrigatório.',
             'password.required' => 'O campo de senha é obrigatório.',
         ];

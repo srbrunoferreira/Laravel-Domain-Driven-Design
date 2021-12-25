@@ -22,9 +22,9 @@ interface EloquentRepositoryInterface
     /**
      * @param int $id
      * @param array $data
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return int
      */
-    public function update(int $id, array $data): Model;
+    public function update(int $id, array $data): int;
 
     /**
      * @param array $data
@@ -34,9 +34,9 @@ interface EloquentRepositoryInterface
 
     /**
      * @param int $id
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return int
      */
-    public function delete(int $id): Model;
+    public function delete(int $id): int;
 
     /**
      * @param array $criterea
@@ -49,4 +49,9 @@ interface EloquentRepositoryInterface
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function findByIdWhereIn(array $ids): Collection;
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getAll(): Collection;
 }

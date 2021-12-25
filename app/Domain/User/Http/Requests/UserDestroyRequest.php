@@ -11,7 +11,7 @@ final class UserDestroyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => 'required|max:20',
+            'id' => ['bail', 'required', 'integer', 'min:1', 'max:30', 'exists:Domain\User\Entities\User,id'],
         ];
     }
 
@@ -20,6 +20,15 @@ final class UserDestroyRequest extends FormRequest
         return [
             'id.required' => 'O ID do usuário é obrigatório.',
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        /*
+        userId is a route parameter and now is the id of the
+        array returned from this.rules() method. So, it is attributed to validation
+        */
+        $this->merge(['id' => $this->route('userId')]);
     }
 
     protected function failedValidation(Validator $validator): void

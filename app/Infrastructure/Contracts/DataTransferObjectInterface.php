@@ -2,53 +2,19 @@
 
 namespace Infrastructure\Contracts;
 
-use Illuminate\Foundation\Http\FormRequest;
-
 interface DataTransferObjectInterface
 {
     /**
-     *  Returns an object containing data from a request.
+     * Returns all non-null properties in an array.
      *
-     * @param  \Illuminate\Foundation\Http\FormRequest $request
-     * @return object
+     * @return array
      */
-    public static function fromRequest(FormRequest $request): object;
+    public function toArray(): array;
 
     /**
-     * Returns an object containing data from a request to create a resource.
+     * Returns all properties in a array, including null ones.
      *
-     * @param  \Illuminate\Foundation\Http\FormRequest $request
-     * @return object
+     * @return array
      */
-    public static function fromStoreRequest(FormRequest $request): object;
-
-    /**
-     * Returns an object containing data from a request to update a resource.
-     *
-     * @param  \Illuminate\Foundation\Http\FormRequest $request
-     * @return object
-     */
-    public static function fromUpdateRequest(FormRequest $request): object;
-
-    /**
-     * Returns an object containing data from a request to update a resource.
-     *
-     * @param  \Illuminate\Foundation\Http\FormRequest $request
-     * @return object
-     */
-    public static function fromDeleteRequest(FormRequest $request): object;
-
-    /**
-     * Returns an object containing data from a request to select a resource.
-     *
-     * @param  \Illuminate\Foundation\Http\FormRequest $request
-     * @return object
-     */
-    public static function fromIndexRequest(FormRequest $request): object;
-
-    /**
-     * @param \Illuminate\Foundation\Http\FormRequest $request
-     * @return object
-     */
-    public static function fromShowRequest(FormRequest $request): object;
+    public function allToArray(): array;
 }

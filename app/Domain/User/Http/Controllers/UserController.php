@@ -22,50 +22,55 @@ final class UserController extends Controller
 
     public function index(UserSelectRequest $request)
     {
-        return response([
-            'method' => __METHOD__,
-            'requestAll()' => $request->all(),
-        ], 200);
+        $data = $request->ids
+        ? $this->userRepository->findByIdWhereIn($request->ids)
+        : $this->userRepository->getAll();
+
+        return response(['data' => $data], 200);
     }
 
     public function store(UserStoreRequest $request)
     {
-        $requestData = UserDataFactory::fromStoreRequest($request);
+        $requestData = UserDataFactory::fromStoreRequest($request)->toArray();
 
-        return response([
-            'method' => __METHOD__,
-            'requestData' => $requestData,
-            'userRepository' => $this->userRepository->store($requestData),
-        ], 200);
+        return response(['user' => $this->userRepository->store($requestData)], 201);
     }
 
     public function show(UserShowRequest $request)
     {
         $requestData = UserDataFactory::fromShowRequest($request);
+        $user = $this->userRepository->findOneById($requestData->getId());
 
-        return response([
-            'method' => __METHOD__,
-            'requestData' => $requestData,
-            'userRepository' => $this->userRepository->findOneById($requestData->id),
-        ], 200);
+        return response(['user' => $user], 200);
     }
 
     public function update(UserUpdateRequest $request)
     {
-        $requestData = UserDataFactory::fromUpdateRequest($request);
+        $userUpdateData = UserDataFactory::fromUpdateRequest($request);
+
+        $userId = $userUpdateData->getId();
+        $updateData = $userUpdateData->toArray();
+
+        unset($updateData['id']);
+
+        $this->userRepository->update($userId, $updateData);
 
         return response([
             'method' => __METHOD__,
-            'requestData' => $requestData,
-            'properties' => $requestData->getFilledData(),
+            'user' => $this->userRepository->findOneById($userId),
         ], 200);
     }
 
     public function destroy(UserDestroyRequest $request)
     {
-        return response([
-            'method' => __METHOD__,
-            'requestAll()' => $request->all(),
-        ], 200);
+        $response = $this->userRepository->delete($request->userId);
+
+        /**
+         * TODO: Create a delete user action, check if
+         * the user exists or not and return the appropriate response.
+         * or continue using https://laravel.com/docs/8.x/validation#specifying-a-custom-column-name
+         */
+
+        return response([$response], 200);
     }
 }

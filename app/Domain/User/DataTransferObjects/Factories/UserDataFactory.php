@@ -2,11 +2,11 @@
 
 namespace Domain\User\DataTransferObjects\Factories;
 
-use Infrastructure\Contracts\DataTransferObjectInterface;
+use Infrastructure\Contracts\DataTransferObjectFactoryInterface;
 use Illuminate\Foundation\Http\FormRequest;
 use Domain\User\DataTransferObjects\UserData;
 
-class UserDataFactory implements DataTransferObjectInterface
+class UserDataFactory implements DataTransferObjectFactoryInterface
 {
     public static function fromRequest(FormRequest $request): UserData
     {
@@ -22,6 +22,7 @@ class UserDataFactory implements DataTransferObjectInterface
         return new UserData([
             'name' => $request->name,
             'email' => $request->email,
+            'password' => $request->password,
         ]);
     }
 
@@ -29,34 +30,24 @@ class UserDataFactory implements DataTransferObjectInterface
     {
         return new UserData([
             'id' => $request->id,
-            'name' => $request->name ?? '', // $request->"newName"
-            'email' => $request->email ?? '', // $request->"newEmail"
-            'password' => $request->password ?? '',
+            'name' => $request->name ?? 's',
+            'email' => $request->email ?? 'a',
+            'password' => $request->password ?? 'd',
         ]);
     }
 
     public static function fromDeleteRequest(FormRequest $request): UserData
     {
-        return new UserData([
-            'id' => $request->id,
-            'anotherPossibleField' => $request->anotherPossibleField,
-        ]);
+        return new UserData(['id' => $request->id]);
     }
 
     public static function fromIndexRequest(FormRequest $request): UserData
     {
-        return new UserData([
-            'id' => $request->id,
-        ]);
+        return new UserData(['ids' => $request->ids ?? null]);
     }
 
     public static function fromShowRequest(FormRequest $request): UserData
     {
-        return new UserData([
-            'id' => $request->id,
-            'name' => $request->name ?? '',
-            'email' => $request->email ?? '',
-            'password' => $request->password ?? '',
-        ]);
+        return new UserData(['id' => $request->id]);
     }
 }

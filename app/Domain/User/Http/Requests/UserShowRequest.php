@@ -11,7 +11,7 @@ final class UserShowRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => 'required|max:20',
+            'id' => ['bail', 'required', 'integer', 'min:1', 'max:30'],
         ];
     }
 

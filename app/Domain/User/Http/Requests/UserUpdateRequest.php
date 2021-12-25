@@ -11,10 +11,10 @@ final class UserUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => 'required|integer|max:30',
-            'name' => 'required_without_all:email,password',
-            'email' => 'required_without_all:name,password',
-            'password' => 'required_without_all:name,email',
+            'id' => ['bail', 'required', 'integer', 'min:1', 'max:30'],
+            'name' => ['bail', 'required_without_all:email,password', 'string', 'min:5', 'alpha', 'max:255'],
+            'email' => ['bail', 'required_without_all:name,password', 'string', 'min:10', 'max:255'],
+            'password' => ['bail', 'required_without_all:name,email', 'string', 'min:8', 'max:255'],
         ];
     }
 

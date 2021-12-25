@@ -2,32 +2,97 @@
 
 namespace Domain\User\DataTransferObjects;
 
-class UserData
+use Infrastructure\Abstracts\DataTransferObject;
+use Illuminate\Support\Carbon;
+
+class UserData extends DataTransferObject
 {
-    // public int $id;
-    // public string $name;
-    // public string $email;
-    // public string $password;
+    protected ?int $id;
+    protected ?string $name;
+    protected ?string $email;
+    protected ?string $password;
+    protected ?Carbon $createdAt;
+    protected ?Carbon $updatedAt;
 
-    public function __construct($data)
+    /**
+     * Initialize the values of the properties.
+     *
+     * @param array $data
+     */
+    public function __construct(array $data)
     {
-        // $this->id = $data['id'];
-        // $this->name = $data['name'];
-        // $this->email = $data['email'];
-
-        foreach ($data as $key => $value)
-        {
-            if (!empty($value))
-            {
-                $this->$key = $value;
-            }
-        }
+        $this->id = $data['id'] ?? null;
+        $this->name = $data['name'] ?? null;
+        $this->email = $data['email'] ?? null;
+        $this->password = $data['password'] ?? null;
+        $this->createdAt = $data['createdAt'] ?? null;
+        $this->updatedAt = $data['updatedAt'] ?? null;
     }
 
-    public function getFilledData()
+
+
+    /**
+     * Get the value of id
+     *
+     * @return int
+     */
+    public function getId()
     {
-        return array_filter(get_object_vars($this), function ($property) {
-            return !empty($property);
-        });
+        return $this->id;
+    }
+
+    /**
+     * Get the value of name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Get the value of email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Get the value of password
+     *
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * Get the value of createdAt
+     *
+     * @return Carbon|null
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Get the value of updatedAt
+     *
+     * @return Carbon|null
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    private function fuck()
+    {
+        return $this;
     }
 }
