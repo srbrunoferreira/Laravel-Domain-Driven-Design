@@ -11,7 +11,7 @@ final class UserSelectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'ids' => 'min:2|max:3', // array of ids, whereIn('status', $request->statuses), whereInPivot('user_id', $request->userIds)
+            'ids' => 'array|min:2|max:20', // array of ids, whereIn('status', $request->statuses), whereInPivot('user_id', $request->userIds)
             'ids.*' => 'distinct:strict',
         ];
     }

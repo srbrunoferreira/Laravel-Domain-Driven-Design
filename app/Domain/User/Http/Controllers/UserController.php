@@ -2,6 +2,8 @@
 
 namespace Domain\User\Http\Controllers;
 
+use Domain\User\Http\Resources\UserResource;
+use Domain\User\Http\Resources\UserCollection;
 use Domain\User\Http\Requests\UserUpdateRequest;
 use Domain\User\Http\Requests\UserStoreRequest;
 use Domain\User\Http\Requests\UserShowRequest;
@@ -26,7 +28,7 @@ final class UserController extends Controller
         ? $this->userRepository->findByIdWhereIn($request->ids)
         : $this->userRepository->getAll();
 
-        return response(['data' => $data], 200);
+        return response(['data' => new UserCollection($data)], 200);
     }
 
     public function store(UserStoreRequest $request)
@@ -41,7 +43,7 @@ final class UserController extends Controller
         $requestData = UserDataFactory::fromShowRequest($request);
         $user = $this->userRepository->findOneById($requestData->getId());
 
-        return response(['user' => $user], 200);
+        return response(['user' => new UserResource($user)], 200);
     }
 
     public function update(UserUpdateRequest $request)
