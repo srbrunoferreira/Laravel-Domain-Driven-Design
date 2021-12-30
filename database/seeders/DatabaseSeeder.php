@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Domain\User\Database\Seeds\UserTableSeed;
 use Illuminate\Database\Seeder;
+use Domain\User\Database\Seeds\UserTableSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        (new UserTableSeed())->run();
+        // run command php artisan db:seed --class=Domain\User\Database\Seeds\UserTableSeeder
+        $this->call(UserTableSeeder::class);
     }
 }

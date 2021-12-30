@@ -2,10 +2,10 @@
 
 namespace Domain\User\Database\Seeds;
 
-use Domain\User\Database\Factories\UserFactory;
 use Illuminate\Database\Seeder;
+use Domain\User\Entities\User;
 
-class UserTableSeed extends Seeder
+class UserTableSeeder extends Seeder
 {
     /**
      * Seed the application's database.
@@ -14,6 +14,7 @@ class UserTableSeed extends Seeder
      */
     public function run()
     {
-        UserFactory::factory(50)->create();
+        // run command php artisan db:seed --class=Domain\User\Database\Seeds\UserTableSeeder
+        User::factory(50)->create();
     }
 }
