@@ -12,7 +12,7 @@ final class UserStoreRequest extends FormRequest
     {
         return [
             'name' => ['bail', 'required', 'string', 'min:5', 'max:255', "regex:/^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)/"],
-            'email' => ['bail', 'required', 'string', 'min:10', 'max:255'],
+            'email' => ['bail', 'required', 'string', 'email', 'min:10', 'max:255'],
             'password' => ['bail', 'required', 'string', 'min:8', 'max:255'],
         ];
     }

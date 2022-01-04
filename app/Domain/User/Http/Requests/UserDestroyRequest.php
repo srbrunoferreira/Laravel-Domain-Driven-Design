@@ -11,7 +11,7 @@ final class UserDestroyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => ['bail', 'required', 'integer', 'min:1', 'max:30', 'exists:Domain\User\Entities\User,id'],
+            'id' => ['bail', 'required', 'integer', 'min:1', 'max:4294967295', 'exists:Domain\User\Entities\User,id'],
         ];
     }
 
@@ -19,6 +19,7 @@ final class UserDestroyRequest extends FormRequest
     {
         return [
             'id.required' => 'O ID do usuário é obrigatório.',
+            'id.exists' => 'User not found.',
         ];
     }
 

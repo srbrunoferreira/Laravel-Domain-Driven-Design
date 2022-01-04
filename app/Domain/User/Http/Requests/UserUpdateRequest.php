@@ -11,10 +11,17 @@ final class UserUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => ['bail', 'required', 'integer', 'min:1', 'max:30'],
+            'id' => ['bail', 'required', 'integer', 'min:1', 'max:4294967295', 'exists:Domain\User\Entities\User,id'],
             'name' => ['bail', 'required_without_all:email,password', 'string', 'min:5', 'alpha', 'max:255'],
-            'email' => ['bail', 'required_without_all:name,password', 'string', 'min:10', 'max:255'],
+            'email' => ['bail', 'required_without_all:name,password', 'email', 'string', 'min:10', 'max:255'],
             'password' => ['bail', 'required_without_all:name,email', 'string', 'min:8', 'max:255'],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'id.exists' => 'User not found.',
         ];
     }
 

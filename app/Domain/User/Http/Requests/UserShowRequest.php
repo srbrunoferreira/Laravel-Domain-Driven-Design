@@ -11,7 +11,7 @@ final class UserShowRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => ['bail', 'required', 'integer', 'min:1', 'max:30'],
+            'id' => ['bail', 'required', 'integer', 'min:1', 'max:4294967295', 'exists:Domain\User\Entities\User,id'],
         ];
     }
 
