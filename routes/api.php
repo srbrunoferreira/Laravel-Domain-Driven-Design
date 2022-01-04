@@ -14,8 +14,8 @@ use Domain\User\Http\Controllers\UserController;
 |
 */
 
-Route::group(['prefix' => '/v1', 'middleware' => ['cors']], function () {
-    Route::prefix('/users')->group(function () {
+Route::group(['prefix' => 'v1', 'middleware' => ['cors']], function () {
+    Route::prefix('users')->group(function () {
         Route::get('/', [UserController::class, 'index']);
         Route::post('/', [UserController::class, 'store']);
         Route::get('/{userId}', [UserController::class, 'show']);
@@ -24,7 +24,7 @@ Route::group(['prefix' => '/v1', 'middleware' => ['cors']], function () {
         Route::delete('/{userId}', [UserController::class, 'destroy']);
     });
 
-    Route::prefix('/calls')->group(function () {
+    Route::prefix('calls')->group(function () {
         Route::get('/calls', [CallController::class, ['index']]);
         Route::post('/', [CallController::class, ['store']]);
         Route::get('/{callId}', [CallController::class, ['show']]);

@@ -28,14 +28,15 @@ final class UserController extends Controller
         ? $this->userRepository->findByIdWhereIn($request->ids)
         : $this->userRepository->getAll();
 
-        return response(['data' => new UserCollection($data)], 200);
+        return response(['data' => new UserCollection($data)]);
     }
 
     public function store(UserStoreRequest $request)
     {
         $requestData = UserDataFactory::fromStoreRequest($request)->toArray();
+        $user = $this->userRepository->store($requestData);
 
-        return response(['user' => $this->userRepository->store($requestData)], 201);
+        return response(['user' => new UserResource($user)], 201);
     }
 
     public function show(UserShowRequest $request)
@@ -43,7 +44,7 @@ final class UserController extends Controller
         $requestData = UserDataFactory::fromShowRequest($request);
         $user = $this->userRepository->findOneById($requestData->getId());
 
-        return response(['user' => new UserResource($user)], 200);
+        return response(['user' => new UserResource($user)]);
     }
 
     public function update(UserUpdateRequest $request)
@@ -56,23 +57,21 @@ final class UserController extends Controller
         unset($updateData['id']);
 
         $this->userRepository->update($userId, $updateData);
+        $user = $this->userRepository->findOneById($userId);
 
-        return response([
-            'method' => __METHOD__,
-            'user' => $this->userRepository->findOneById($userId),
-        ], 200);
+        return response(['user' => new UserResource($user)]);
     }
 
     public function destroy(UserDestroyRequest $request)
     {
-        $response = $this->userRepository->delete($request->userId);
-
         /**
          * TODO: Create a delete user action, check if
          * the user exists or not and return the appropriate response.
          * or continue using https://laravel.com/docs/8.x/validation#specifying-a-custom-column-name
          */
 
-        return response([$response], 200);
+        $this->userRepository->delete($request->userId);
+
+        return response()->noContent();
     }
 }

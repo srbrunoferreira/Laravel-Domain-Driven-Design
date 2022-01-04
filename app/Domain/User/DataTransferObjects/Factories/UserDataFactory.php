@@ -10,6 +10,7 @@ class UserDataFactory implements DataTransferObjectFactoryInterface
 {
     public static function fromRequest(FormRequest $request): UserData
     {
+        // or return new UserData($request->all());
         return new UserData([
             'id' => $request->id,
             'name' => $request->name,
@@ -19,6 +20,7 @@ class UserDataFactory implements DataTransferObjectFactoryInterface
 
     public static function fromStoreRequest(FormRequest $request): UserData
     {
+        // or return new UserData($request->all());
         return new UserData([
             'name' => $request->name,
             'email' => $request->email,
@@ -28,11 +30,12 @@ class UserDataFactory implements DataTransferObjectFactoryInterface
 
     public static function fromUpdateRequest(FormRequest $request): UserData
     {
+        // or return new UserData($request->all());
         return new UserData([
             'id' => $request->id,
-            'name' => $request->name ?? 's',
-            'email' => $request->email ?? 'a',
-            'password' => $request->password ?? 'd',
+            'name' => $request->name ?? null,
+            'email' => $request->email ?? null,
+            'password' => $request->password ?? null,
         ]);
     }
 

@@ -6,8 +6,6 @@ use Infrastructure\Contracts\DataTransferObjectInterface;
 
 abstract class DataTransferObject implements DataTransferObjectInterface
 {
-    protected array $properties;
-
     /**
      * Returns all properties in a array.
      *
@@ -20,8 +18,6 @@ abstract class DataTransferObject implements DataTransferObjectInterface
         return array_filter(
             get_object_vars($object),
             function ($property) use ($onlyNonNull) {
-                echo $property;
-
                 return $onlyNonNull ? !empty($property) : true;
             }
         );
