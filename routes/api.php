@@ -15,14 +15,7 @@ use Domain\User\Http\Controllers\UserController;
 */
 
 Route::group(['prefix' => 'v1', 'middleware' => ['cors']], function () {
-    Route::prefix('users')->group(function () {
-        Route::get('/', [UserController::class, 'index']);
-        Route::post('/', [UserController::class, 'store']);
-        Route::get('/{userId}', [UserController::class, 'show']);
-        Route::put('/{userId}', [UserController::class, 'update']);
-        Route::patch('/{userId}', [UserController::class, 'update']);
-        Route::delete('/{userId}', [UserController::class, 'destroy']);
-    });
+    Route::apiResource('users', UserController::class);
 
     Route::prefix('calls')->group(function () {
         Route::get('/calls', [CallController::class, ['index']]);
