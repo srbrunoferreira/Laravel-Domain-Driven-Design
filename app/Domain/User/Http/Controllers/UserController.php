@@ -2,6 +2,7 @@
 
 namespace Domain\User\Http\Controllers;
 
+use Infrastructure\Abstracts\Controller;
 use Domain\User\Http\Resources\UserResource;
 use Domain\User\Http\Resources\UserCollection;
 use Domain\User\Http\Requests\UserUpdateRequest;
@@ -11,7 +12,6 @@ use Domain\User\Http\Requests\UserSelectRequest;
 use Domain\User\Http\Requests\UserDestroyRequest;
 use Domain\User\DataTransferObjects\Factories\UserDataFactory;
 use Domain\User\Contracts\UserRepositoryInterface;
-use Application\Core\Http\Controllers\Controller;
 
 final class UserController extends Controller
 {
