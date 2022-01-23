@@ -6,19 +6,17 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 
-final class UserShowRequest extends FormRequest
-{
-    public function rules(): array
-    {
+final class UserShowRequest extends FormRequest {
+    public function rules(): array {
         return [
-            'id' => ['bail', 'required', 'integer', 'min:1', 'max:4294967295', 'exists:Domain\User\Entities\User,id'],
+            'userId' => ['bail', 'required', 'integer', 'min:1', 'max:4294967295', 'exists:Domain\User\Entities\User,id'],
         ];
     }
 
-    public function messages(): array
-    {
+    public function messages(): array {
         return [
-            'id.required' => 'O ID do usuário é obrigatório.',
+            'userId.required' => 'O ID do usuário é obrigatório.',
+            'exists' => 'O usuário não existe',
         ];
     }
 
@@ -26,17 +24,15 @@ final class UserShowRequest extends FormRequest
      * @see https://stackoverflow.com/a/63999403/14839095
      * @see https://laravel.com/docs/master/validation#preparing-input-for-validation
      */
-    protected function prepareForValidation()
-    {
+    protected function prepareForValidation() {
         /*
         userId is a route parameter and now is the id of the
         array returned from this.rules() method. So, it is attributed to validation
         */
-        $this->merge(['id' => $this->route('userId')]);
+        $this->merge(['userId' => $this->route('userId')]);
     }
 
-    protected function failedValidation(Validator $validator): void
-    {
+    protected function failedValidation(Validator $validator): void {
         throw new HttpResponseException(response([
             $validator->errors(),
         ]), 422);

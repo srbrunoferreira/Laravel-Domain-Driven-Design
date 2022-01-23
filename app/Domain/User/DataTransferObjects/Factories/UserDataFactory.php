@@ -51,6 +51,6 @@ class UserDataFactory implements DataTransferObjectFactoryInterface
 
     public static function fromShowRequest(FormRequest $request): UserData
     {
-        return new UserData(['id' => $request->id]);
+        return new UserData(['id' => $request->userId]);
     }
 }

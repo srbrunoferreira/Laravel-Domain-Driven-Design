@@ -15,7 +15,8 @@ use Domain\User\Http\Controllers\UserController;
 */
 
 Route::group(['prefix' => 'v1', 'middleware' => ['cors']], function () {
-    Route::apiResource('users', UserController::class);
+    Route::apiResource('users', UserController::class)
+        ->parameter('users', 'userId');
 
     Route::prefix('calls')->group(function () {
         Route::get('/calls', [CallController::class, ['index']]);

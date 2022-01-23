@@ -4,7 +4,6 @@ namespace Domain\User\Http\Controllers;
 
 use Infrastructure\Abstracts\Controller;
 use Domain\User\Http\Resources\UserResource;
-use Domain\User\Http\Resources\UserCollection;
 use Domain\User\Http\Requests\UserUpdateRequest;
 use Domain\User\Http\Requests\UserStoreRequest;
 use Domain\User\Http\Requests\UserShowRequest;
@@ -25,10 +24,12 @@ final class UserController extends Controller
     public function index(UserSelectRequest $request)
     {
         $data = $request->ids
-        ? $this->userRepository->findByIdWhereIn($request->ids)
-        : $this->userRepository->getAll();
+            ? $this->userRepository->findByIdWhereIn($request->ids)
+            : $this->userRepository->getAll();
 
-        return response(['data' => new UserCollection($data)]);
+        $users = UserResource::collection($data);
+
+        return parent::response(['users' => $users])->success();
     }
 
     public function store(UserStoreRequest $request)
@@ -42,9 +43,11 @@ final class UserController extends Controller
     public function show(UserShowRequest $request)
     {
         $requestData = UserDataFactory::fromShowRequest($request);
-        $user = $this->userRepository->findOneById($requestData->getId());
+        $userData = $this->userRepository->findOneById($requestData->getId());
 
-        return response(['user' => new UserResource($user)]);
+        $user = new UserResource($userData);
+
+        return parent::response(['user' => $user])->success();
     }
 
     public function update(UserUpdateRequest $request)
