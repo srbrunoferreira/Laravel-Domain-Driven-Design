@@ -28,7 +28,7 @@ class UserData extends DataTransferObject
         $this->password = $data['password'] ?? null;
         $this->createdAt = $data['createdAt'] ?? null;
         $this->updatedAt = $data['updatedAt'] ?? null;
-        $this->indexRequestFilters = $data['filters'];
+        $this->indexRequestFilters = $data['filters'] ?? null;
     }
 
     /**
