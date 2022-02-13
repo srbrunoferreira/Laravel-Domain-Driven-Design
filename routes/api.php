@@ -1,7 +1,7 @@
 <?php
 
+use Infrastructure\Http\BaseController;
 use Illuminate\Support\Facades\Route;
-use Domain\User\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,16 +14,5 @@ use Domain\User\Http\Controllers\UserController;
 |
 */
 
-Route::group(['prefix' => 'v1', 'middleware' => ['cors']], function () {
-    Route::apiResource('users', UserController::class)
-        ->parameter('users', 'userId');
-
-    Route::prefix('calls')->group(function () {
-        Route::get('/calls', [CallController::class, ['index']]);
-        Route::post('/', [CallController::class, ['store']]);
-        Route::get('/{callId}', [CallController::class, ['show']]);
-        Route::put('/{callId}', [CallController::class, ['update']]);
-        Route::patch('/{callId}', [CallController::class, ['update']]);
-        Route::delete('/{callId}', [CallController::class, ['destroy']]);
-    });
-});
+Route::apiResource('calls', BaseController::class)
+    ->parameter('calls', 'callId');

@@ -2,8 +2,9 @@
 
 namespace Domain\User\Contracts;
 
-use Infrastructure\Contracts\EloquentRepositoryInterface;
+use Infrastructure\Repository\Eloquent\Contracts\EloquentRepositoryInterface;
 
 interface UserRepositoryInterface extends EloquentRepositoryInterface
 {
+    //
 }

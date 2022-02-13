@@ -1,8 +1,8 @@
 <?php
 
-namespace Infrastructure\Abstracts;
+namespace Infrastructure\Repository\Eloquent;
 
-use Infrastructure\Contracts\EloquentRepositoryInterface;
+use Infrastructure\Repository\Eloquent\Contracts\EloquentRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
 

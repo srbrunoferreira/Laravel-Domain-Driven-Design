@@ -2,7 +2,7 @@
 
 namespace Domain\User\Repositories;
 
-use Infrastructure\Abstracts\EloquentRepository;
+use Infrastructure\Repository\Eloquent\EloquentRepository;
 use Domain\User\Contracts\UserRepositoryInterface;
 
 class UserRepository extends EloquentRepository implements UserRepositoryInterface

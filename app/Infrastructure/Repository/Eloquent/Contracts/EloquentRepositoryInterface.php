@@ -1,6 +1,6 @@
 <?php
 
-namespace Infrastructure\Contracts;
+namespace Infrastructure\Repository\Eloquent\Contracts;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
@@ -9,7 +9,7 @@ interface EloquentRepositoryInterface
 {
     /**
      * @param int $id
-     * @return RepositoryInterface
+     * @return \Illuminate\Database\Eloquent\Model
      */
     public function findOneById(int $id): Model;
 

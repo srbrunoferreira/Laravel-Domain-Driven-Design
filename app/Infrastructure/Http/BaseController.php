@@ -1,14 +1,14 @@
 <?php
 
-namespace Infrastructure\Abstracts;
+namespace Infrastructure\Http;
 
-use Infrastructure\Traits\ResponseTrait;
-use Illuminate\Routing\Controller as BaseController;
+use Infrastructure\Http\ResponseTrait;
+use Illuminate\Routing\Controller;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-class Controller extends BaseController
+class BaseController extends Controller
 {
     use AuthorizesRequests;
     use DispatchesJobs;

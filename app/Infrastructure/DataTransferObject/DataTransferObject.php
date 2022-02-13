@@ -1,8 +1,8 @@
 <?php
 
-namespace Infrastructure\Abstracts;
+namespace Infrastructure\DataTransferObject;
 
-use Infrastructure\Contracts\DataTransferObjectInterface;
+use Infrastructure\DataTransferObject\Contracts\DataTransferObjectInterface;
 
 abstract class DataTransferObject implements DataTransferObjectInterface
 {

@@ -2,7 +2,7 @@
 
 namespace Domain\User\DataTransferObjects;
 
-use Infrastructure\Abstracts\DataTransferObject;
+use Infrastructure\DataTransferObject\DataTransferObject;
 use Illuminate\Support\Carbon;
 
 class UserData extends DataTransferObject

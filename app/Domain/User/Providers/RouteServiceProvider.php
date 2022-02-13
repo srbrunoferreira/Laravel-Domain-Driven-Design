@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Core\Providers;
+namespace Domain\User\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\RateLimiter;
@@ -38,14 +38,14 @@ class RouteServiceProvider extends ServiceProvider
         $this->configureRateLimiting();
 
         $this->routes(function () {
-            Route::prefix('api')
+            Route::prefix('api/v1')
                 ->middleware(['api', 'cors'])
                 ->namespace($this->namespace)
-                ->group(base_path('routes/api.php'));
+                ->group(base_path('/app/Domain/User/Http/Routes/api.v1.php'));
 
             Route::middleware(['web', 'cors'])
                 ->namespace($this->namespace)
-                ->group(base_path('routes/web.php'));
+                ->group(base_path('/app/Domain/User/Http/Routes/web.php'));
         });
     }
 

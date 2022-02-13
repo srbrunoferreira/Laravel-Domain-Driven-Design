@@ -2,7 +2,7 @@
 
 namespace Domain\User\DataTransferObjects\Factories;
 
-use Infrastructure\Contracts\DataTransferObjectFactoryInterface;
+use Infrastructure\DataTransferObject\Contracts\DataTransferObjectFactoryInterface;
 use Illuminate\Foundation\Http\FormRequest;
 use Domain\User\DataTransferObjects\UserData;
 

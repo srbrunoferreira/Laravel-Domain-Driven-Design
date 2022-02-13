@@ -2,8 +2,8 @@
 
 namespace Domain\User\Providers;
 
+use Infrastructure\Repository\Eloquent\EloquentRepository;
 use Infrastructure\Contracts\EloquentRepositoryInterface;
-use Infrastructure\Abstracts\EloquentRepository;
 use Illuminate\Support\ServiceProvider;
 use Domain\User\Repositories\UserRepository;
 use Domain\User\Entities\User;

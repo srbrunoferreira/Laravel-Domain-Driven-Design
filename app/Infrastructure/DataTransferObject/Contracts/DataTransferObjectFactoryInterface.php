@@ -1,6 +1,6 @@
 <?php
 
-namespace Infrastructure\Contracts;
+namespace Infrastructure\DataTransferObject\Contracts;
 
 use Illuminate\Foundation\Http\FormRequest;
 
