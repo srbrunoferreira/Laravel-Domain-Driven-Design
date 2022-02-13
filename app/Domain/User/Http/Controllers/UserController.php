@@ -23,13 +23,15 @@ final class UserController extends Controller
 
     public function index(UserSelectRequest $request)
     {
-        $data = $request->ids
-            ? $this->userRepository->findByIdWhereIn($request->ids)
-            : $this->userRepository->getAll();
+        if ($request->ids) {
+            $users = $this->userRepository->findByIdWhereIn($request->ids);
+        } else {
+            $requestData = UserDataFactory::fromIndexRequest($request);
 
-        $users = UserResource::collection($data);
+            $users=  $this->userRepository->getAll($requestData->getFilters());
+        }
 
-        return parent::response(['users' => $users])->success();
+        return parent::response($users)->success();
     }
 
     public function store(UserStoreRequest $request)

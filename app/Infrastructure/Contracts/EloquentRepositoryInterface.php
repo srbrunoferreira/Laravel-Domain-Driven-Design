@@ -51,7 +51,10 @@ interface EloquentRepositoryInterface
     public function findByIdWhereIn(array $ids): Collection;
 
     /**
+     * @param array $filters
+     * @param \Illuminate\Foundation\Http\FormRequest $request
+     *
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function getAll(): Collection;
+    public function getAll(array $filters = []);
 }

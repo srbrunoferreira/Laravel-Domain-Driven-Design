@@ -46,7 +46,17 @@ class UserDataFactory implements DataTransferObjectFactoryInterface
 
     public static function fromIndexRequest(FormRequest $request): UserData
     {
-        return new UserData(['ids' => $request->ids ?? null]);
+        return new UserData([
+            'ids' => $request->ids ?? null,
+            'filters' => [
+                'orderBy' => $request->orderBy ?? 'id',
+                'orderByDirection' => $request->orderByDirection ?? 'asc',
+                'name' => $request->name,
+                'email' => $request->email,
+                'createdAt' => $request->createdAt,
+                'updatedAt' => $request->updatedAt,
+            ],
+        ]);
     }
 
     public static function fromShowRequest(FormRequest $request): UserData

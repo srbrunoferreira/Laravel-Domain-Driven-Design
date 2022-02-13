@@ -50,7 +50,7 @@ abstract class EloquentRepository implements EloquentRepositoryInterface
         return $this->model->whereIn('id', $ids)->get();
     }
 
-    public function getAll(): Collection
+    public function getAll(array $filters = [])
     {
         return $this->model->all();
     }

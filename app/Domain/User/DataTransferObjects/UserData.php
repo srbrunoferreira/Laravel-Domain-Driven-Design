@@ -13,6 +13,7 @@ class UserData extends DataTransferObject
     protected ?string $password;
     protected ?Carbon $createdAt;
     protected ?Carbon $updatedAt;
+    protected ?array $indexRequestFilters;
 
     /**
      * Initialize the values of the properties.
@@ -27,9 +28,8 @@ class UserData extends DataTransferObject
         $this->password = $data['password'] ?? null;
         $this->createdAt = $data['createdAt'] ?? null;
         $this->updatedAt = $data['updatedAt'] ?? null;
+        $this->indexRequestFilters = $data['filters'];
     }
-
-
 
     /**
      * Get the value of id
@@ -91,8 +91,13 @@ class UserData extends DataTransferObject
         return $this->updatedAt;
     }
 
-    private function fuck()
+    /**
+     * Get the filters of an index request.
+     *
+     * @return array|null
+     */
+    public function getFilters()
     {
-        return $this;
+        return $this->indexRequestFilters;
     }
 }
