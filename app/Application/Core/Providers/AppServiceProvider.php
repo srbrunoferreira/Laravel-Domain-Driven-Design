@@ -5,6 +5,7 @@ namespace Application\Core\Providers;
 use Illuminate\Support\ServiceProvider;
 use Domain\User\Providers\RouteServiceProvider as UserRouteServiceProvider;
 use Domain\User\Providers\RepositoryServiceProvider;
+use Domain\User\Providers\DataFactoryProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -17,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->register(RepositoryServiceProvider::class);
         $this->app->register(UserRouteServiceProvider::class);
+        $this->app->register(DataFactoryProvider::class);
     }
 
     /**

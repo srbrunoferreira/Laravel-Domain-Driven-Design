@@ -11,14 +11,19 @@ use Domain\User\Http\Requests\UserSelectRequest;
 use Domain\User\Http\Requests\UserDestroyRequest;
 use Domain\User\DataTransferObjects\Factories\UserDataFactory;
 use Domain\User\Contracts\UserRepositoryInterface;
+use Domain\User\Contracts\UserDataFactoryInterface;
 
 final class UserController extends BaseController
 {
     private UserRepositoryInterface $userRepository;
+    private UserDataFactoryInterface $userDataFactory;
 
-    public function __construct(UserRepositoryInterface $userRepository)
-    {
+    public function __construct(
+        UserRepositoryInterface $userRepository,
+        UserDataFactoryInterface $userDataFactory
+    ) {
         $this->userRepository = $userRepository;
+        $this->userDataFactory = $userDataFactory;
     }
 
     public function index(UserSelectRequest $request)
@@ -26,7 +31,7 @@ final class UserController extends BaseController
         if ($request->ids) {
             $users = $this->userRepository->findByIdWhereIn($request->ids);
         } else {
-            $requestData = UserDataFactory::fromIndexRequest($request);
+            $requestData = $this->userDataFactory->fromIndexRequest($request);
 
             $users=  $this->userRepository->getAll($requestData->getFilters());
         }
@@ -44,7 +49,7 @@ final class UserController extends BaseController
 
     public function show(UserShowRequest $request)
     {
-        $requestData = UserDataFactory::fromShowRequest($request);
+        $requestData = $this->userDataFactory->fromShowRequest($request);
         $userData = $this->userRepository->findOneById($requestData->getId());
 
         $user = new UserResource($userData);
@@ -54,7 +59,7 @@ final class UserController extends BaseController
 
     public function update(UserUpdateRequest $request)
     {
-        $userUpdateData = UserDataFactory::fromUpdateRequest($request);
+        $userUpdateData = $this->userDataFactory->fromUpdateRequest($request);
 
         $userId = $userUpdateData->getId();
         $updateData = $userUpdateData->toArray();

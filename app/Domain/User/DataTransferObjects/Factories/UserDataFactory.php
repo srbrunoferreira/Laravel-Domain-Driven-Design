@@ -5,8 +5,9 @@ namespace Domain\User\DataTransferObjects\Factories;
 use Infrastructure\DataTransferObject\Contracts\DataTransferObjectFactoryInterface;
 use Illuminate\Foundation\Http\FormRequest;
 use Domain\User\DataTransferObjects\UserData;
+use Domain\User\Contracts\UserDataFactoryInterface;
 
-class UserDataFactory implements DataTransferObjectFactoryInterface
+class UserDataFactory implements UserDataFactoryInterface
 {
     public static function fromRequest(FormRequest $request): UserData
     {
